@@ -2,14 +2,15 @@ package com.alfredo.booking;
 
 public class BookingDAO {
 
-    private static Booking[] bookings;
-    private static int totalBookings;
+    private Booking[] bookings;
+    private int totalBookings;
 
-    static {
-        bookings = new Booking[5]; // dummy
+    // TODO
+    // initialize bookings array with proper capacity
+    // bookings size should be total amount of cars available
+    public BookingDAO() {
+        bookings = new Booking[5];
         totalBookings = 0;
-        // initialize bookings array with proper capacity
-        // bookings size should be total amount of cars available
     }
 
    protected void storeBooking(Booking booking) {

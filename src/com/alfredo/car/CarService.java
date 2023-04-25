@@ -4,7 +4,7 @@ public class CarService {
 
     private CarDAO carDAO;
 
-    {
+    public CarService() {
         carDAO = new CarDAO();
     }
 
@@ -22,5 +22,27 @@ public class CarService {
 
     public int numberOfAvailableElectricCars() {
         return carDAO.getAvailableElectricCars();
+    }
+
+    public void displayAllAvailableCarsMenu() {
+        for (Car car : getCars()) {
+            if (car == null) {
+                continue;
+            }
+            if (car.isAvailable()) {
+                System.out.println(car);
+            }
+        }
+    }
+
+    public void displayAllElectricCarsMenu() {
+        for (Car car : getCars()) {
+            if (car == null) {
+                continue;
+            }
+            if (car.isAvailable() && car.isElectric()) {
+                System.out.println(car);
+            }
+        }
     }
 }

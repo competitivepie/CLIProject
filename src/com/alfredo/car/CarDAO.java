@@ -9,6 +9,8 @@ public class CarDAO {
     private static int availableCars;
     private static int availableElectricCars;
 
+    // TODO
+    // Fix availableElectricCars
     static {
         cars = new Car[]{
                 new Car(1234, UUID.fromString("95231e5f-6069-4939-b647-97917211995b"), new BigDecimal("45.00"), "TOYOTA", false, true),
