@@ -40,7 +40,7 @@ public class BookingService {
         while (isBookingCar) {
             try {
                 if(carService.numberOfAvailableCars() == 0) {
-                    System.out.println("No cars available to book. :(");
+                    System.out.println("\n\nNo cars available to book. :(");
                     break;
                 }
                 carService.displayAllAvailableCarsMenu();
@@ -71,7 +71,7 @@ public class BookingService {
                                         UUID bookingID = UUID.randomUUID();
                                         addNewBooking(bookingID, user, car, false);
                                         carService.removeCar(car);
-                                        System.out.println("Success! Booked car with reg number " + carRegNumber +
+                                        System.out.println("\n\nSuccess! Booked car with reg number " + carRegNumber +
                                                 " for user " + user);
                                         System.out.println("Booking reference: " + bookingID);
                                         car.setAvailable(false);
@@ -82,16 +82,16 @@ public class BookingService {
                                     }
                                 }
                             } catch (IllegalArgumentException e) {
-                                System.out.println("Your input is invalid. Try again!");
+                                System.out.println("\n\nYour input is invalid. Try again!\n\n");
                             }
                         }
                     }
                 }
                 if (!isBooked) {
-                    System.out.println("Your input is invalid. Try again!");
+                    System.out.println("\n\nYour input is invalid. Try again!\n\n");
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("Your input is invalid. Try again!");
+                System.out.println("\n\nYour input is invalid. Try again!\n\n");
             }
         }
     }
@@ -120,9 +120,9 @@ public class BookingService {
                         }
                         isSelectingUser = false;
                         if (totalUserBookings == 0) {
-                            System.out.println("No cars have been booked by this user.");
+                            System.out.println("\n\nNo cars have been booked by this user.\n\n");
                         } else {
-                            System.out.println("Bookings made by " + user);
+                            System.out.println("\n\nBookings made by " + user + "\n\n");
                             for (Booking booking : bookingsMadeByUser) {
                                 if (booking != null) {
                                     System.out.println(booking);
@@ -133,7 +133,7 @@ public class BookingService {
                     }
                 }
             } catch (IllegalArgumentException e) {
-                System.out.println("Your input is invalid. You must enter a user ID.");
+                System.out.println("\n\nYour input is invalid. You must enter a user ID.\n\n");
             }
         }
     }

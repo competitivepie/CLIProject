@@ -28,21 +28,21 @@ public class Main {
                     case 2 -> bookingService.viewAllUserBookedCars(scanner);
                     case 3 -> {
                         if (bookingService.numberOfBookings() == 0) {
-                            System.out.println("No bookings have been made.");
+                            System.out.println("\n\nNo bookings have been made.");
                         } else {
                             bookingService.displayAllBookings();
                         }
                     }
                     case 4 -> {
                         if (carService.numberOfAvailableCars() == 0) {
-                            System.out.println("No cars available. :(");
+                            System.out.println("\n\nNo cars available. :(");
                         } else {
                             carService.displayAllAvailableCarsMenu();
                         }
                     }
                     case 5 -> {
                         if (carService.numberOfAvailableElectricCars() == 0) {
-                            System.out.println("No electric cars available. :(");
+                            System.out.println("\n\nNo electric cars available. :(");
                         } else {
                             carService.displayAllElectricCarsMenu();
                         }
@@ -53,7 +53,7 @@ public class Main {
                             + "You must enter a number between 1 and 7!");
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Your input is invalid. You must enter a number between 1 and 7!");
+                System.out.println("\n\nYour input is invalid. You must enter a number between 1 and 7!\n\n");
                 scanner.next();
             }
         }
