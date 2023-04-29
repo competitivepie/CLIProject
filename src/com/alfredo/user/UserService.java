@@ -13,8 +13,8 @@ public class UserService {
     }
 
     public void displaySelectUserIDMenu() {
-        System.out.println("-> Select User ID (Press 7 to go back to previous menu)");
         displayAllUsers();
+        System.out.println("-> Select User ID (Press 7 to go back to previous menu)");
     }
 
     public void displayAllUsers() {

@@ -36,6 +36,7 @@ public class BookingService {
     public void bookACar(Scanner scanner) {
         var isBookingCar = true;
         var isSelectingUser = false;
+        var isBooked = false;
         while (isBookingCar) {
             try {
                 if(carService.numberOfAvailableCars() == 0) {
@@ -45,21 +46,23 @@ public class BookingService {
                 carService.displayAllAvailableCarsMenu();
                 System.out.println("-> Select car reg number (Press 7 to go back to previous menu) ");
                 String carSelected = scanner.next();
-                if (Integer.parseInt(carSelected) == 7) {
+                int carRegNumber = Integer.parseInt(carSelected);
+                if (carRegNumber == 7) {
                     break;
                 }
                 for (Car car : carService.getCars()) {
                     if (car == null) {
                         continue;
                     }
-                    if (Integer.parseInt(carSelected) == car.getRegNumber()) {
-                        int carRegNumber = car.getRegNumber();
+                    if (carRegNumber == car.getRegNumber()) {
+                        carRegNumber = car.getRegNumber();
                         isSelectingUser = true;
                         while (isSelectingUser) {
                             try {
                                 userService.displaySelectUserIDMenu();
                                 String userSelected = scanner.next().trim();
                                 if (userSelected.equals("7".trim())) {
+                                    isBooked = true;
                                     break;
                                 }
                                 UUID userID = UUID.fromString(userSelected);
@@ -74,20 +77,20 @@ public class BookingService {
                                         car.setAvailable(false);
                                         isSelectingUser = false;
                                         isBookingCar = false;
+                                        isBooked = true;
                                         break;
                                     }
                                 }
                             } catch (IllegalArgumentException e) {
                                 System.out.println("Your input is invalid. Try again!");
-                                break;
                             }
                         }
-                    } else {
-                        continue;
                     }
-                    break;
                 }
-            //    System.out.println("Your input is invalid. Try again!");
+                if (!isBooked) {
+                    System.out.println("Your input is invalid. Try again!");
+                    isBooked = false;
+                }
             } catch (IllegalArgumentException e) {
                 System.out.println("Your input is invalid. Try again!");
             }

@@ -21,9 +21,6 @@ public class CarDAO {
         availableElectricCars = 2;
     }
 
-    // TODO
-    // Fix availableElectricCars
-
     protected void deleteCar(Car car) {
         for (int i = 0; i < cars.length; i++) {
             if (cars[i] == car) {

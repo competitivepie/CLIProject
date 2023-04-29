@@ -1,6 +1,7 @@
 package com.alfredo.booking;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 import com.alfredo.car.Car;
@@ -71,5 +72,18 @@ public class Booking {
                 ", bookingTime=" + bookingTime +
                 ", isCanceled=" + isCanceled +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Booking booking = (Booking) o;
+        return isCanceled == booking.isCanceled && Objects.equals(bookingID, booking.bookingID) && Objects.equals(user, booking.user) && Objects.equals(car, booking.car) && Objects.equals(bookingTime, booking.bookingTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bookingID, user, car, bookingTime, isCanceled);
     }
 }

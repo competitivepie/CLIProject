@@ -5,9 +5,6 @@ public class BookingDAO {
     private Booking[] bookings;
     private int totalBookings;
 
-    // TODO
-    // initialize bookings array with proper capacity
-    // bookings size should be total amount of cars available
     public BookingDAO() {
         bookings = new Booking[5];
         totalBookings = 0;
