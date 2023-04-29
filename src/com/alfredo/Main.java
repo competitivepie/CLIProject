@@ -24,12 +24,8 @@ public class Main {
             try {
                 input = scanner.nextInt();
                 switch (input) {
-                    case 1 -> {
-                        bookingService.bookACar(scanner);
-                    }
-                    case 2 -> {
-                        bookingService.viewAllUserBookedCars(scanner);
-                    }
+                    case 1 -> bookingService.bookACar(scanner);
+                    case 2 -> bookingService.viewAllUserBookedCars(scanner);
                     case 3 -> {
                         if (bookingService.numberOfBookings() == 0) {
                             System.out.println("No bookings have been made.");

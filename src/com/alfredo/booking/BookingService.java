@@ -38,10 +38,16 @@ public class BookingService {
         var isSelectingUser = false;
         while (isBookingCar) {
             try {
-                //TODO: If statement for when there's no cars left to book.
+                if(carService.numberOfAvailableCars() == 0) {
+                    System.out.println("No cars available to book. :(");
+                    break;
+                }
                 carService.displayAllAvailableCarsMenu();
-                System.out.println("-> Select car reg number");
+                System.out.println("-> Select car reg number (Press 7 to go back to previous menu) ");
                 String carSelected = scanner.next();
+                if (Integer.parseInt(carSelected) == 7) {
+                    break;
+                }
                 for (Car car : carService.getCars()) {
                     if (car == null) {
                         continue;
@@ -52,15 +58,20 @@ public class BookingService {
                         while (isSelectingUser) {
                             try {
                                 userService.displaySelectUserIDMenu();
-                                UUID userSelected = UUID.fromString(scanner.next().trim());
+                                String userSelected = scanner.next().trim();
+                                if (userSelected.equals("7".trim())) {
+                                    break;
+                                }
+                                UUID userID = UUID.fromString(userSelected);
                                 for (User user : userService.getUsers()) {
-                                    if (user.getId().equals(userSelected)) {
+                                    if (user.getId().equals(userID)) {
                                         UUID bookingID = UUID.randomUUID();
                                         addNewBooking(bookingID, user, car, false);
                                         carService.removeCar(car);
                                         System.out.println("Success! Booked car with reg number " + carRegNumber +
                                                 " for user " + user);
                                         System.out.println("Booking reference: " + bookingID);
+                                        car.setAvailable(false);
                                         isSelectingUser = false;
                                         isBookingCar = false;
                                         break;
@@ -68,14 +79,15 @@ public class BookingService {
                                 }
                             } catch (IllegalArgumentException e) {
                                 System.out.println("Your input is invalid. Try again!");
+                                break;
                             }
                         }
                     } else {
-                        // TODO: Fix weird bug
                         continue;
                     }
                     break;
                 }
+            //    System.out.println("Your input is invalid. Try again!");
             } catch (IllegalArgumentException e) {
                 System.out.println("Your input is invalid. Try again!");
             }
@@ -88,6 +100,9 @@ public class BookingService {
             try {
                 userService.displaySelectUserIDMenu();
                 String userSelected = scanner.next();
+                if (userSelected.equals("7".trim())) {
+                    break;
+                }
                 for (User user : userService.getUsers()) {
                     if (user == null) {
                         continue;

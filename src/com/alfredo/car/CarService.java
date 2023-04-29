@@ -2,7 +2,7 @@ package com.alfredo.car;
 
 public class CarService {
 
-    private CarDAO carDAO;
+    private final CarDAO carDAO;
 
     public CarService() {
         carDAO = new CarDAO();
