@@ -89,7 +89,6 @@ public class BookingService {
                 }
                 if (!isBooked) {
                     System.out.println("Your input is invalid. Try again!");
-                    isBooked = false;
                 }
             } catch (IllegalArgumentException e) {
                 System.out.println("Your input is invalid. Try again!");
