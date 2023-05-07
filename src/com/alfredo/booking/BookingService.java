@@ -46,7 +46,7 @@ public class BookingService {
                 carService.displayAllAvailableCarsMenu();
                 System.out.println("-> Select car reg number (Press 7 to go back to previous menu) ");
                 String carSelected = scanner.next();
-                int carRegNumber = Integer.parseInt(carSelected);
+                var carRegNumber = Integer.parseInt(carSelected);
                 if (carRegNumber == 7) {
                     break;
                 }

@@ -23,44 +23,8 @@ public class Booking {
         this.isCanceled = isCanceled;
     }
 
-    public UUID getBookingID() {
-        return bookingID;
-    }
-
-    public void setBookingID(UUID bookingID) {
-        this.bookingID = bookingID;
-    }
-
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public LocalDateTime getBookingTime() {
-        return bookingTime;
-    }
-
-    public void setBookingTime(LocalDateTime bookingTime) {
-        this.bookingTime = bookingTime;
-    }
-
-    public boolean isCanceled() {
-        return isCanceled;
-    }
-
-    public void setCanceled(boolean canceled) {
-        isCanceled = canceled;
     }
 
     @Override

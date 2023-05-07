@@ -26,40 +26,8 @@ public class Car {
         return regNumber;
     }
 
-    public void setRegNumber(int regNumber) {
-        this.regNumber = regNumber;
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public BigDecimal getRentalPricePerDay() {
-        return rentalPricePerDay;
-    }
-
-    public void setRentalPricePerDay(BigDecimal rentalPricePerDay) {
-        this.rentalPricePerDay = rentalPricePerDay;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
     public boolean isElectric() {
         return isElectric;
-    }
-
-    public void setElectric(boolean electric) {
-        isElectric = electric;
     }
 
     public boolean isAvailable() {
