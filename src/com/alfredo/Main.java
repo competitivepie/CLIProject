@@ -2,6 +2,7 @@ package com.alfredo;
 
 import com.alfredo.booking.BookingService;
 import com.alfredo.car.CarService;
+import com.alfredo.user.User;
 import com.alfredo.user.UserService;
 
 import java.util.Scanner;
@@ -25,10 +26,10 @@ public class Main {
                 switch (input) {
                     case 1 -> bookingService.startBookingProcess(scanner);
                     case 2 -> bookingService.viewAllUserBookedCars(scanner);
-                    case 3 -> { viewAllBookings(); }
-                    case 4 -> { viewAllAvailableCars(); }
-                    case 5 -> { viewAvailableElectricCars(); }
-                    case 6 -> userService.displayAllUsers();
+                    case 3 ->  viewAllBookings();
+                    case 4 ->  viewAllAvailableCars();
+                    case 5 ->  viewAvailableElectricCars();
+                    case 6 ->  viewAllUsers();
                     case 7 -> isRunning = false;
                     default -> System.out.println(input + " is not a valid option. "
                             + "You must enter a number between 1 and 7!");
@@ -75,5 +76,8 @@ public class Main {
         }
     }
 
+    private static void viewAllUsers() {
+        userService.displayAllUsers();
+    }
 
 }

@@ -8,8 +8,8 @@ public class UserService {
         userArrayDataAccessService = new UserArrayDataAccessService();
     }
 
-    public User[] getUsers() {
-        return userArrayDataAccessService.selectAllUsers();
+    public User[] getAllUsers() {
+        return userArrayDataAccessService.getUsers();
     }
 
     public void displaySelectUserIDMenu() {
@@ -18,8 +18,12 @@ public class UserService {
     }
 
     public void displayAllUsers() {
-        for (User user : getUsers()) {
-            System.out.println(user);
+        for (User user : getAllUsers()) {
+            if (user != null) {
+                System.out.println(user);
+            } else {
+                break;
+            }
         }
     }
 }

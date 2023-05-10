@@ -66,7 +66,7 @@ public class BookingService {
                                     break;
                                 }
                                 UUID userID = UUID.fromString(userSelected);
-                                for (User user : userService.getUsers()) {
+                                for (User user : userService.getAllUsers()) {
                                     if (user.getId().equals(userID)) {
                                         UUID bookingID = UUID.randomUUID();
                                         addNewBooking(bookingID, user, car, false);
@@ -105,7 +105,7 @@ public class BookingService {
                 if (userSelected.equals("7".trim())) {
                     break;
                 }
-                for (User user : userService.getUsers()) {
+                for (User user : userService.getAllUsers()) {
                     if (user == null) {
                         continue;
                     }
