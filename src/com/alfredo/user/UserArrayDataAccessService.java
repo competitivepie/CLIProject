@@ -10,19 +10,19 @@ public class UserArrayDataAccessService implements UserDAO {
     private static final int MAX_NUMBER_OF_USERS = 100;
 
     public User[] getUsers() {
-        User[] fileUsers = new User[MAX_NUMBER_OF_USERS];
+        User[] users = new User[MAX_NUMBER_OF_USERS];
 
         File file = new File("src/com/alfredo/users.csv");
         try {
             Scanner sc = new Scanner(file);
             for(int i = 0; sc.hasNext(); i++) {
                 String[] userData = sc.nextLine().split(",");
-                fileUsers[i] = new User(UUID.fromString(userData[0]), userData[1]);
+                users[i] = new User(UUID.fromString(userData[0]), userData[1]);
             }
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
 
-        return fileUsers;
+        return users;
     }
 }
