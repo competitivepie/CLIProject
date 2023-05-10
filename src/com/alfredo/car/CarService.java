@@ -2,26 +2,26 @@ package com.alfredo.car;
 
 public class CarService {
 
-    private final CarDAO carDAO;
+    private static final CarArrayDataAccessService carArrayDataAccessService;
 
-    public CarService() {
-        carDAO = new CarDAO();
+    static {
+        carArrayDataAccessService = new CarArrayDataAccessService();
     }
 
     public void removeCar(Car car) {
-        carDAO.deleteCar(car);
+        carArrayDataAccessService.deleteCar(car);
     }
 
     public Car[] getCars() {
-        return carDAO.selectAllCars();
+        return carArrayDataAccessService.selectAllCars();
     }
 
     public int numberOfAvailableCars() {
-        return carDAO.getAvailableCars();
+        return carArrayDataAccessService.getAllAvailableCars();
     }
 
     public int numberOfAvailableElectricCars() {
-        return carDAO.getAvailableElectricCars();
+        return carArrayDataAccessService.getAvailableElectricCars();
     }
 
     public void displayAllAvailableCarsMenu() {

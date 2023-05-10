@@ -11,29 +11,29 @@ import java.util.UUID;
 
 public class BookingService {
 
-    private final BookingDAO bookingDAO;
-    private final UserService userService;
-    private final CarService carService;
+    private static final BookingArrayDataAccessService bookingArrayDataAccessService;
+    private static final UserService userService;
+    private static final CarService carService;
 
-    public BookingService() {
-        bookingDAO = new BookingDAO();
+    static {
+        bookingArrayDataAccessService = new BookingArrayDataAccessService();
         userService = new UserService();
         carService = new CarService();
     }
 
     public void addNewBooking(UUID bookingID, User user, Car car, boolean isCanceled) {
-        bookingDAO.storeBooking(new Booking(bookingID, user, car, LocalDateTime.now(), isCanceled));
+        bookingArrayDataAccessService.storeBooking(new Booking(bookingID, user, car, LocalDateTime.now(), isCanceled));
     }
 
     public Booking[] getBookings() {
-        return bookingDAO.selectAllBookings();
+        return bookingArrayDataAccessService.selectAllBookings();
     }
 
     public int numberOfBookings() {
-        return bookingDAO.getTotalBookings();
+        return bookingArrayDataAccessService.getTotalBookings();
     }
 
-    public void bookACar(Scanner scanner) {
+    public void startBookingProcess(Scanner scanner) {
         var isBookingCar = true;
         var isSelectingUser = false;
         var isBooked = false;

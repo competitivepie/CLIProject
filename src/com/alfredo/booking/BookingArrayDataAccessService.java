@@ -1,0 +1,30 @@
+package com.alfredo.booking;
+
+public class BookingArrayDataAccessService implements BookingDAO {
+
+    private static final Booking[] bookings;
+    private static int totalBookings;
+
+    static {
+        bookings = new Booking[5];
+        totalBookings = 0;
+    }
+
+    public void storeBooking(Booking booking) {
+        for (int i = 0; i < bookings.length; i++) {
+            if (bookings[i] == null) {
+                bookings[totalBookings++] = booking;
+                break;
+            }
+        }
+    }
+
+    public Booking[] selectAllBookings() {
+        return bookings;
+    }
+
+    public int getTotalBookings() {
+        return totalBookings;
+    }
+
+}

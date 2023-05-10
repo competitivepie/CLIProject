@@ -2,14 +2,14 @@ package com.alfredo.user;
 
 public class UserService {
 
-    private UserDAO userDAO;
+    private final UserArrayDataAccessService userArrayDataAccessService;
 
     public UserService() {
-        userDAO = new UserDAO();
+        userArrayDataAccessService = new UserArrayDataAccessService();
     }
 
     public User[] getUsers() {
-        return userDAO.selectAllUsers();
+        return userArrayDataAccessService.selectAllUsers();
     }
 
     public void displaySelectUserIDMenu() {
