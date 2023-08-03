@@ -4,8 +4,8 @@ public class UserService {
 
     private final UserFileDataAccessService userFileDataAccessService;
 
-    public UserService() {
-        userFileDataAccessService = new UserFileDataAccessService();
+    public UserService(UserFileDataAccessService userFileDataAccessService) {
+        this.userFileDataAccessService = userFileDataAccessService;
     }
 
     public User[] getAllUsers() {
@@ -25,5 +25,8 @@ public class UserService {
                 break;
             }
         }
+    }
+
+    public void viewAllUsers() {displayAllUsers();
     }
 }

@@ -1,19 +1,26 @@
 package com.alfredo;
 
+import com.alfredo.booking.BookingArrayDataAccessService;
 import com.alfredo.booking.BookingService;
+import com.alfredo.car.CarArrayDataAccessService;
 import com.alfredo.car.CarService;
-import com.alfredo.user.User;
+import com.alfredo.user.UserFileDataAccessService;
 import com.alfredo.user.UserService;
 
 import java.util.Scanner;
 
 public class Main {
 
-   private static final BookingService bookingService = new BookingService();
-   private static final CarService carService = new CarService();
-   private static final UserService userService = new UserService();
-
     public static void main(String[] args) {
+        BookingArrayDataAccessService bookingArrayDataAccessService = new BookingArrayDataAccessService();
+        CarArrayDataAccessService carArrayDataAccessService = new CarArrayDataAccessService();
+        UserFileDataAccessService userFileDataAccessService = new UserFileDataAccessService();
+        CarService carService = new CarService(carArrayDataAccessService);
+        UserService userService = new UserService(userFileDataAccessService);
+        BookingService bookingService = new BookingService(bookingArrayDataAccessService,
+                userService,
+                carService
+        );
         Scanner scanner = new Scanner(System.in);
 
         var isRunning = true;
@@ -26,10 +33,10 @@ public class Main {
                 switch (input) {
                     case 1 -> bookingService.startBookingProcess(scanner);
                     case 2 -> bookingService.viewAllUserBookedCars(scanner);
-                    case 3 ->  viewAllBookings();
-                    case 4 ->  viewAllAvailableCars();
-                    case 5 ->  viewAvailableElectricCars();
-                    case 6 ->  viewAllUsers();
+                    case 3 -> bookingService.viewAllBookings();
+                    case 4 ->  carService.viewAvailableCars();
+                    case 5 ->  carService.viewAvailableElectricCars();
+                    case 6 ->  userService.viewAllUsers();
                     case 7 -> isRunning = false;
                     default -> System.out.println(input + " is not a valid option. "
                             + "You must enter a number between 1 and 7!");
@@ -50,33 +57,6 @@ public class Main {
         System.out.println("5 - View Available Electric Cars");
         System.out.println("6 - View All Users");
         System.out.println("7 - Exit");
-    }
-    private static void viewAllBookings() {
-        if (bookingService.numberOfBookings() == 0) {
-            System.out.println("\n\nNo bookings have been made.");
-        } else {
-            bookingService.displayAllBookings();
-        }
-    }
-
-    private static void viewAllAvailableCars() {
-        if (carService.numberOfAvailableCars() == 0) {
-            System.out.println("\n\nNo cars available. :(");
-        } else {
-            carService.displayAllAvailableCarsMenu();
-        }
-    }
-
-    private static void viewAvailableElectricCars() {
-        if (carService.numberOfAvailableElectricCars() == 0) {
-            System.out.println("\n\nNo electric cars available. :(");
-        } else {
-            carService.displayAllElectricCarsMenu();
-        }
-    }
-
-    private static void viewAllUsers() {
-        userService.displayAllUsers();
     }
 
 }

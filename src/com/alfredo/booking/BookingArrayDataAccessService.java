@@ -2,12 +2,12 @@ package com.alfredo.booking;
 
 public class BookingArrayDataAccessService implements BookingDAO {
 
-    private static final Booking[] bookings;
-    private static int totalBookings;
+    private final Booking[] bookings;
+    private int totalBookings;
 
-    static {
-        bookings = new Booking[5];
-        totalBookings = 0;
+    public BookingArrayDataAccessService() {
+        this.bookings = new Booking[5];
+        this.totalBookings = 0;
     }
 
     public void storeBooking(Booking booking) {

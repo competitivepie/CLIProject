@@ -11,14 +11,15 @@ import java.util.UUID;
 
 public class BookingService {
 
-    private static final BookingArrayDataAccessService bookingArrayDataAccessService;
-    private static final UserService userService;
-    private static final CarService carService;
+    private final BookingArrayDataAccessService bookingArrayDataAccessService;
+    private final UserService userService;
+    private final CarService carService;
 
-    static {
-        bookingArrayDataAccessService = new BookingArrayDataAccessService();
-        userService = new UserService();
-        carService = new CarService();
+    public BookingService(BookingArrayDataAccessService bookingArrayDataAccessService, UserService userService,
+                          CarService carService) {
+        this.bookingArrayDataAccessService = bookingArrayDataAccessService;
+        this.userService = userService;
+        this.carService = carService;
     }
 
     public void addNewBooking(UUID bookingID, User user, Car car, boolean isCanceled) {
@@ -40,7 +41,6 @@ public class BookingService {
         while (isBookingCar) {
             try {
                 if(carService.numberOfAvailableCars() == 0) {
-                    System.out.println("\n\nNo cars available to book. :(");
                     break;
                 }
                 carService.displayAllAvailableCarsMenu();
@@ -135,6 +135,14 @@ public class BookingService {
             } catch (IllegalArgumentException e) {
                 System.out.println("\n\nYour input is invalid. You must enter a user ID.\n\n");
             }
+        }
+    }
+
+    public void viewAllBookings() {
+        if (numberOfBookings() == 0) {
+            System.out.println("\n\nNo bookings have been made.");
+        } else {
+            displayAllBookings();
         }
     }
 

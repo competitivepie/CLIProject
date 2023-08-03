@@ -2,10 +2,10 @@ package com.alfredo.car;
 
 public class CarService {
 
-    private static final CarArrayDataAccessService carArrayDataAccessService;
+    private final CarArrayDataAccessService carArrayDataAccessService;
 
-    static {
-        carArrayDataAccessService = new CarArrayDataAccessService();
+    public CarService(CarArrayDataAccessService carArrayDataAccessService) {
+        this.carArrayDataAccessService = carArrayDataAccessService;
     }
 
     public void removeCar(Car car) {
@@ -43,6 +43,22 @@ public class CarService {
             if (car.isAvailable() && car.isElectric()) {
                 System.out.println(car);
             }
+        }
+    }
+
+    public void viewAvailableCars() {
+        if (numberOfAvailableCars() == 0) {
+            System.out.println("\n\nNo cars available. :(");
+        } else {
+            displayAllAvailableCarsMenu();
+        }
+    }
+
+    public void viewAvailableElectricCars() {
+        if (numberOfAvailableElectricCars() == 0) {
+            System.out.println("\n\n No electric cars available. :(");
+        } else {
+            displayAllElectricCarsMenu();
         }
     }
 }

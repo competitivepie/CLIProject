@@ -5,12 +5,12 @@ import java.util.UUID;
 
 public class CarArrayDataAccessService implements CarDAO {
 
-    private static final Car[] cars;
-    private static int availableCars;
-    private static int availableElectricCars;
+    private final Car[] cars;
+    private int availableCars;
+    private int availableElectricCars;
 
-    static {
-        cars = new Car[]{
+    public CarArrayDataAccessService() {
+        this.cars = new Car[]{
                 new Car(1234, UUID.fromString("95231e5f-6069-4939-b647-97917211995b"), new BigDecimal("45.00"), "TOYOTA", false, true),
                 new Car(5555, UUID.fromString("4b9b59b7-28dd-4e9e-9d02-f565a39664cd"), new BigDecimal("90.00"), "TESLA", true, true),
                 new Car(6789, UUID.fromString("0f0c4660-2a78-4014-a782-123de26d5276"), new BigDecimal("65.00"), "MERCEDES", false, true),
