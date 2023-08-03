@@ -51,7 +51,6 @@ public class Main {
         System.out.println("6 - View All Users");
         System.out.println("7 - Exit");
     }
-
     private static void viewAllBookings() {
         if (bookingService.numberOfBookings() == 0) {
             System.out.println("\n\nNo bookings have been made.");

@@ -1,28 +1,20 @@
 package com.alfredo.user;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.util.UUID;
 
 public class UserArrayDataAccessService implements UserDAO {
 
-    private static final int MAX_NUMBER_OF_USERS = 100;
+    private static final User[] users;
 
+    static {
+        users = new User[]{
+                new User(UUID.fromString("8ca51d2b-aaaf-4bf2-834a-e02964e10fc3"), "James"),
+                new User(UUID.fromString("b10d126a-3608-4980-9f9c-aa179f5cebc3"), "Jamila")
+        };
+    }
+
+    @Override
     public User[] getUsers() {
-        User[] users = new User[MAX_NUMBER_OF_USERS];
-
-        File file = new File("src/com/alfredo/users.csv");
-        try {
-            Scanner sc = new Scanner(file);
-            for(int i = 0; sc.hasNext(); i++) {
-                String[] userData = sc.nextLine().split(",");
-                users[i] = new User(UUID.fromString(userData[0]), userData[1]);
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-
         return users;
     }
 }

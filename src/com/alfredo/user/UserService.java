@@ -2,14 +2,14 @@ package com.alfredo.user;
 
 public class UserService {
 
-    private final UserArrayDataAccessService userArrayDataAccessService;
+    private final UserFileDataAccessService userFileDataAccessService;
 
     public UserService() {
-        userArrayDataAccessService = new UserArrayDataAccessService();
+        userFileDataAccessService = new UserFileDataAccessService();
     }
 
     public User[] getAllUsers() {
-        return userArrayDataAccessService.getUsers();
+        return userFileDataAccessService.getUsers();
     }
 
     public void displaySelectUserIDMenu() {
