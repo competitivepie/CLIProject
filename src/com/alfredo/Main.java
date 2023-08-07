@@ -17,7 +17,8 @@ public class Main {
         UserFileDataAccessService userFileDataAccessService = new UserFileDataAccessService();
         CarService carService = new CarService(carArrayDataAccessService);
         UserService userService = new UserService(userFileDataAccessService);
-        BookingService bookingService = new BookingService(bookingArrayDataAccessService,
+        BookingService bookingService = new BookingService(
+                bookingArrayDataAccessService,
                 userService,
                 carService
         );
@@ -25,7 +26,6 @@ public class Main {
 
         var isRunning = true;
         var input = 0;
-
         while (isRunning) {
             displayMainMenu();
             try {
@@ -43,7 +43,6 @@ public class Main {
                 }
             } catch (Exception e) {
                 System.out.println("\n\nYour input is invalid. You must enter a number between 1 and 7!\n\n");
-                scanner.next();
             }
         }
         scanner.close();

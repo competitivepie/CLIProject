@@ -1,13 +1,11 @@
 package com.alfredo.car;
 
+import java.util.List;
+
 public interface CarDAO {
 
     void deleteCar(Car car);
 
-    Car[] selectAllCars();
-
-    int getAllAvailableCars();
-
-    int getAvailableElectricCars();
+    List<Car> selectAllCars();
 
 }

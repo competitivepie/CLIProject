@@ -6,8 +6,7 @@ import com.alfredo.user.User;
 import com.alfredo.user.UserService;
 
 import java.time.LocalDateTime;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 public class BookingService {
 
@@ -26,7 +25,7 @@ public class BookingService {
         bookingArrayDataAccessService.storeBooking(new Booking(bookingID, user, car, LocalDateTime.now(), isCanceled));
     }
 
-    public Booking[] getBookings() {
+    public List<Booking> getBookings() {
         return bookingArrayDataAccessService.selectAllBookings();
     }
 
@@ -35,6 +34,10 @@ public class BookingService {
     }
 
     public void startBookingProcess(Scanner scanner) {
+        if(carService.getCars().size() == 0) {
+            System.out.println("No cars available.");
+            return;
+        }
         var isBookingCar = true;
         var isSelectingUser = false;
         var isBooked = false;
@@ -50,12 +53,10 @@ public class BookingService {
                 if (carRegNumber == 7) {
                     break;
                 }
-                for (Car car : carService.getCars()) {
-                    if (car == null) {
-                        continue;
-                    }
-                    if (carRegNumber == car.getRegNumber()) {
-                        carRegNumber = car.getRegNumber();
+                List<Car> carsList = carService.getCars();
+                for (int i = 0; i < carsList.size(); i++) {
+                    Car selectedCar = carsList.get(i);
+                    if (carRegNumber == selectedCar.getRegNumber()) {
                         isSelectingUser = true;
                         while (isSelectingUser) {
                             try {
@@ -69,12 +70,12 @@ public class BookingService {
                                 for (User user : userService.getAllUsers()) {
                                     if (user.getId().equals(userID)) {
                                         UUID bookingID = UUID.randomUUID();
-                                        addNewBooking(bookingID, user, car, false);
-                                        carService.removeCar(car);
+                                        addNewBooking(bookingID, user, selectedCar, false);
+                                        carService.removeCar(selectedCar);
                                         System.out.println("\n\nSuccess! Booked car with reg number " + carRegNumber +
                                                 " for user " + user);
                                         System.out.println("Booking reference: " + bookingID);
-                                        car.setAvailable(false);
+                                        selectedCar.setAvailable(false);
                                         isSelectingUser = false;
                                         isBookingCar = false;
                                         isBooked = true;
@@ -105,33 +106,21 @@ public class BookingService {
                 if (userSelected.equals("7".trim())) {
                     break;
                 }
-                for (User user : userService.getAllUsers()) {
-                    if (user == null) {
-                        continue;
-                    }
-                    Booking[] bookingsMadeByUser = new Booking[numberOfBookings()];
-                    var totalUserBookings = 0;
-                    if (user.getId().equals(UUID.fromString(userSelected))) {
-                        for (int i = 0; i < bookingsMadeByUser.length; i++) {
-                            if (getBookings()[i].getUser().equals(user)) {
-                                bookingsMadeByUser[i] = getBookings()[i];
-                                totalUserBookings++;
-                            }
-                        }
-                        isSelectingUser = false;
-                        if (totalUserBookings == 0) {
-                            System.out.println("\n\nNo cars have been booked by this user.\n\n");
-                        } else {
-                            System.out.println("\n\nBookings made by " + user + "\n\n");
-                            for (Booking booking : bookingsMadeByUser) {
-                                if (booking != null) {
-                                    System.out.println(booking);
-                                }
-                            }
-                        }
-                        break;
+                List<Booking> userBookings = new ArrayList<>();
+                for(Booking booking : getBookings()) {
+                    if(booking.getUser().getId().equals(UUID.fromString(userSelected))) {
+                        userBookings.add(booking);
                     }
                 }
+                if(userBookings.isEmpty()) {
+                    System.out.println("\n\nNo cars have been booked by this user.\n\n");
+                } else {
+                    System.out.println("\n\nBookings made by " + userBookings.get(0).getUser());
+                    for (Booking booking : userBookings) {
+                        System.out.println(booking);
+                    }
+                }
+                isSelectingUser = false;
             } catch (IllegalArgumentException e) {
                 System.out.println("\n\nYour input is invalid. You must enter a user ID.\n\n");
             }
@@ -148,9 +137,6 @@ public class BookingService {
 
     public void displayAllBookings() {
         for (Booking booking : getBookings()) {
-            if (booking == null) {
-                break;
-            }
             System.out.println(booking);
         }
     }

@@ -1,30 +1,26 @@
 package com.alfredo.booking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookingArrayDataAccessService implements BookingDAO {
 
-    private final Booking[] bookings;
-    private int totalBookings;
+    private final List<Booking> bookings;
 
     public BookingArrayDataAccessService() {
-        this.bookings = new Booking[5];
-        this.totalBookings = 0;
+        this.bookings = new ArrayList<>();
     }
 
     public void storeBooking(Booking booking) {
-        for (int i = 0; i < bookings.length; i++) {
-            if (bookings[i] == null) {
-                bookings[totalBookings++] = booking;
-                break;
-            }
-        }
+        bookings.add(booking);
     }
 
-    public Booking[] selectAllBookings() {
+    public List<Booking> selectAllBookings() {
         return bookings;
     }
 
     public int getTotalBookings() {
-        return totalBookings;
+        return bookings.size();
     }
 
 }

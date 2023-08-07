@@ -1,5 +1,7 @@
 package com.alfredo.user;
 
+import java.util.List;
+
 public class UserService {
 
     private final UserFileDataAccessService userFileDataAccessService;
@@ -8,7 +10,7 @@ public class UserService {
         this.userFileDataAccessService = userFileDataAccessService;
     }
 
-    public User[] getAllUsers() {
+    public List<User> getAllUsers() {
         return userFileDataAccessService.getUsers();
     }
 
@@ -18,15 +20,10 @@ public class UserService {
     }
 
     public void displayAllUsers() {
-        for (User user : getAllUsers()) {
-            if (user != null) {
-                System.out.println(user);
-            } else {
-                break;
-            }
+        for(User user : getAllUsers()) {
+            System.out.println(user);
         }
     }
 
-    public void viewAllUsers() {displayAllUsers();
-    }
+    public void viewAllUsers() { displayAllUsers(); }
 }
